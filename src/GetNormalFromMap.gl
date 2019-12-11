@@ -1,0 +1,19 @@
+
+vec3 GetNormalFromMap(const vec3 n, const vec3 t, const vec3 b)
+{
+	if(false == textureNormalAvailable)
+	{
+		return vec3(0.0f);
+	}
+
+	// Transform RGB normals to [-1, 1]
+    vec3 normalFromMap = texture(textureNormal[0], TexCoords).xyz;
+	vec3 normal = normalize(normalFromMap * 2.0f - 1.0f);	
+
+	vec3 T = normalize(t);
+	vec3 B = normalize(b);
+    vec3 N = normalize(n);  	
+
+    mat3 TBN = mat3(T, B, N);	
+    return normalize(TBN * normal);
+}

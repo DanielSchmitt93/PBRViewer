@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Shader">
+      <UniqueIdentifier>{d032f981-84ac-488a-9b38-d8ef70fee6a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{f46db2c2-4dca-4f0e-b1f3-e9f913e8cf15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{54b0ceee-7c06-4dfa-bf6c-9067bf667a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controller">
+      <UniqueIdentifier>{ba9c7aab-c6ce-4757-a145-ccd713fdffa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{0baee5e7-4076-41fa-8691-a2ea6f6507fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{906eb110-ee51-415d-9810-8bd2dce5d25c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controller">
+      <UniqueIdentifier>{29f0c275-842a-4070-859b-577d25c75618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\Components">
+      <UniqueIdentifier>{ff3a4968-026e-4354-867c-212271ab8a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Components">
+      <UniqueIdentifier>{81cf75c3-57ae-4ba6-93f3-c78c14872c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader\NoLighting">
+      <UniqueIdentifier>{0fe8a8f2-6402-4471-95e6-cb952a0b97df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader\BlinnPhong">
+      <UniqueIdentifier>{b100f349-024b-49bc-9a22-16d78848a6ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader\Lightsources">
+      <UniqueIdentifier>{c4da8f95-0940-41e7-b496-aecc6aa1b6ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader\PBR">
+      <UniqueIdentifier>{45128991-f7a5-4cb8-8acf-4b346d0c7ae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{d932cf7f-574c-46b2-95a1-c6e90fae7d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader\Skybox">
+      <UniqueIdentifier>{b338d439-2888-4d75-b0e2-5c47c31b63b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader\Shadows">
+      <UniqueIdentifier>{322eb6d0-25e5-4e00-855b-bc1ae2fe5cac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Data">
+      <UniqueIdentifier>{7d680b5b-4a45-4ee2-8907-f26748a4749e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader\Debugging">
+      <UniqueIdentifier>{bb083e83-591f-4d04-905a-92410edc3cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{d2febcde-8072-4d03-ae3d-5897580a1baa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{f6686949-1624-4b73-bec3-a126a9fc5fd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\Widgets">
+      <UniqueIdentifier>{7b5f48e6-eb3e-4675-8870-36e29e2d56f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Widgets">
+      <UniqueIdentifier>{ebf38c2c-3772-4481-92fc-56ed8c203eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\Components\GraphicSettings">
+      <UniqueIdentifier>{46943555-f410-4429-b5d6-8a75292c44d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Components\GraphicSettings">
+      <UniqueIdentifier>{6ef20554-0be5-46e3-988e-29a3ca4caf04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader\Common">
+      <UniqueIdentifier>{d4023328-1435-4449-ad8f-83de57ef0496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{7df20f67-7581-4fa5-a248-fcae68f7af3e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerController.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerModel.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerModelLoader.cpp">
+      <Filter>Source Files\View\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerOverlay.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerEnumerations.h">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerArcballCamera.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerOpenGLUtilities.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerScalarSlider.cpp">
+      <Filter>Source Files\View\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerSkybox.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerObjectCreator.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerShadows.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerIBLSettings.cpp">
+      <Filter>Source Files\View\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerGraphicSettings.cpp">
+      <Filter>Source Files\View\Components\GraphicSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerBlinnPhongWidget.cpp">
+      <Filter>Source Files\View\Components\GraphicSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerCookTorranceBRDFWidget.cpp">
+      <Filter>Source Files\View\Components\GraphicSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerDebugWidget.cpp">
+      <Filter>Source Files\View\Components\GraphicSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerOrenNayarBRDFWidget.cpp">
+      <Filter>Source Files\View\Components\GraphicSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerAshikhminShirleyBRDFWidget.cpp">
+      <Filter>Source Files\View\Components\GraphicSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerMesh.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerPointLight.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerShader.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerMouseCallbacks.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerKeyboardCallbacks.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerFramebufferCallbacks.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerScene.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerInputConstants.h">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRViewerDisneyBRDF.cpp">
+      <Filter>Source Files\View\Components\GraphicSettings</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PBRViewerModel.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerController.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerModelLoader.h">
+      <Filter>Header Files\View\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerOverlay.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerTexture.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerArcballCamera.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerOpenGLUtilities.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerScalarSlider.h">
+      <Filter>Header Files\View\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerOverlayConstants.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerObjectCreator.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerSkybox.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerShadows.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerLogger.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerIBLSettings.h">
+      <Filter>Header Files\View\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerGraphicSettings.h">
+      <Filter>Header Files\View\Components\GraphicSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerBXDFWidget.h">
+      <Filter>Header Files\View\Components\GraphicSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerBlinnPhongWidget.h">
+      <Filter>Header Files\View\Components\GraphicSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerCookTorranceBRDFWidget.h">
+      <Filter>Header Files\View\Components\GraphicSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerDebugWidget.h">
+      <Filter>Header Files\View\Components\GraphicSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerOrenNayarBRDFWidget.h">
+      <Filter>Header Files\View\Components\GraphicSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerAshikhminShirleyBRDFWidget.h">
+      <Filter>Header Files\View\Components\GraphicSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerMesh.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerPointLight.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerShader.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerVertex.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerKeyboardCallbacks.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerMouseCallbacks.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerFramebufferCallbacks.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerScene.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRViewerDisneyBRDF.h">
+      <Filter>Header Files\View\Components\GraphicSettings</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="EquirectangularToCubemap.frag">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="EquirectangularToCubemap.vert">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="PreFilterEnvironmentMap.frag">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="PreFilterEnvironmentMap.vert">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="BlinnPhong.frag">
+      <Filter>Source Files\Shader\BlinnPhong</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="BRDFLookup.frag">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="BRDFLookup.vert">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="NoLighting.frag">
+      <Filter>Source Files\Shader\NoLighting</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="NoLighting.vert">
+      <Filter>Source Files\Shader\NoLighting</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="lightsource.frag">
+      <Filter>Source Files\Shader\Lightsources</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Skybox.vert">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Skybox.frag">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="NormalVector.frag">
+      <Filter>Source Files\Shader\Debugging</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="NormalVector.geom">
+      <Filter>Source Files\Shader\Debugging</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="NormalVector.vert">
+      <Filter>Source Files\Shader\Debugging</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="IrradianceConvolution.vert">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="IrradianceConvolution.frag">
+      <Filter>Source Files\Shader\Skybox</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="SelfShadowing.frag">
+      <Filter>Source Files\Shader\Shadows</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="SelfShadowing.vert">
+      <Filter>Source Files\Shader\Shadows</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="CookTorrance.frag">
+      <Filter>Source Files\Shader\PBR</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="OrenNayar.frag">
+      <Filter>Source Files\Shader\PBR</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Debug.frag">
+      <Filter>Source Files\Shader\Debugging</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="AshikhminShirley.frag">
+      <Filter>Source Files\Shader\PBR</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="CalculateShadowCoverage.gl">
+      <Filter>Source Files\Shader\Common</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ChooseRenderOutput.gl">
+      <Filter>Source Files\Shader\Common</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="GetNormalFromMap.gl">
+      <Filter>Source Files\Shader\Common</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="FresnelApproximations.gl">
+      <Filter>Source Files\Shader\Common</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="VectorTransformation.gl">
+      <Filter>Source Files\Shader\Common</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="NormalDistributionFunctions.gl">
+      <Filter>Source Files\Shader\Common</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="DisneyBSDF.frag">
+      <Filter>Source Files\Shader\PBR</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="DisneyBRDF.frag">
+      <Filter>Source Files\Shader\PBR</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="GeometryFunctions.gl">
+      <Filter>Source Files\Shader\Common</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="icon.png">
+      <Filter>Resources</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="CommonVertexShader.vert">
+      <Filter>Source Files\Shader\Common</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ImportanceSampleGGX.gl">
+      <Filter>Source Files\Shader\Common</Filter>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FresnelEquations.gl">
+      <Filter>Source Files\Shader\Common</Filter>
+    </None>
+  </ItemGroup>
+</Project>

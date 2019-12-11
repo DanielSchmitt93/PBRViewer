@@ -1,0 +1,175 @@
+// ---------------------------------------------
+//          --- Isotropic functions ---
+// ---------------------------------------------
+
+// See "Real Time Rendering 4th ed. - Equation 9.24"
+float SmithG1_GGX(const float nDotX, const float roughness)
+{			
+	// From Disney: Squared roughness		
+	float alpha = roughness * roughness;	
+
+	// See "Real Time Rendering 4th ed. - Equation 9.37"
+	float a = nDotX / (alpha * sqrt(1 - pow(nDotX, 2)));	
+
+	// The lambda value differs for each NDF. The procedure to derive lambda for a given NDF is described in publications like 
+	// "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs" by Eric Heitz.	
+	// The value here is from "Real Time Rendering 4th ed. p. 341". 
+	// The same value is used in the MATLAB code from Eric Heitz (Appendix C) in the beforementioned paper.		
+	float lambda_GGX = (-1.0f + sqrt(1 + 1 / a)) / 2;
+
+	return 1.0f / (1.0f + lambda_GGX);
+}
+
+// See "Real Time Rendering 4th ed. - Equation 9.27"
+float SeparableSmith_GGX(const float vDotN, const float lDotN, const float roughness)
+{
+	float maskingFactor = SmithG1_GGX(vDotN, roughness);
+    float shadowingFactor = SmithG1_GGX(lDotN, roughness);
+
+    return maskingFactor * shadowingFactor;
+}
+
+float SmithG1_Beckmann(const float nDotX, const float roughness)
+{			
+	// From Disney: Squared roughness		
+	float alpha = roughness * roughness;	
+
+	// See "Real Time Rendering 4th ed. - Equation 9.37"
+	float a = nDotX / (alpha * sqrt(1 - pow(nDotX, 2)));	
+
+	// The lambda value differs for each NDF. The procedure to derive lambda for a given NDF is described in publications like 
+	// "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs" by Eric Heitz.	
+	// Approximation to avoid the error function. See "Real Time Rendering 4th ed. - Equation 9.39"
+	if(a >= 1.6f)
+	{
+		return 1.0f;
+	}
+	
+	float lambda_Beckmann = (1.0f - 1.259f * a + 0.396f * pow(a, 2)) / (3.535f * a + 2.181 * pow(a, 2));	
+	return 1.0f / (1.0f + lambda_Beckmann);
+}
+
+// See "Real Time Rendering 4th ed. - Equation 9.27"
+float SeparableSmith_Beckmann(const float vDotN, const float lDotN, const float roughness)
+{	
+	float maskingFactor = SmithG1_Beckmann(vDotN, roughness);
+    float shadowingFactor = SmithG1_Beckmann(lDotN, roughness);
+
+    return maskingFactor * shadowingFactor;
+}
+
+// See "Real Time Rendering 4th ed. - Equation 9.32"
+float HeitzSmithHeightDirectionCorrelatedG2_GGX(const vec3 v, const vec3 l, const float nDotV, const float nDotL, const float roughness)
+{
+	// From Disney: Squared roughness		
+	float alpha = roughness * roughness;	
+
+	vec3 h = normalize(v + l);
+	float xDotH = dot(v, h);
+
+	// See "Real Time Rendering 4th ed. - Equation 9.37"
+	float a_v = nDotV / (alpha * sqrt(1 - pow(nDotV, 2)));	
+	float a_l = nDotL / (alpha * sqrt(1 - pow(nDotL, 2)));	
+
+	// The lambda value differs for each NDF. The procedure to derive lambda for a given NDF is described in publications like 
+	// "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs" by Eric Heitz.	
+	// The value here is from "Real Time Rendering 4th ed. p. 341". 
+	// The same value is used in the MATLAB code from Eric Heitz (Appendix C) in the beforementioned paper.		
+	float lambda_GGX_v = (-1.0f + sqrt(1 + 1 / pow(a_v, 2))) / 2;
+	float lambda_GGX_l = (-1.0f + sqrt(1 + 1 / pow(a_l, 2))) / 2;
+
+	// This function was proposed by Ginneken et al. in their paper "Diffuse and Specular Reflectance from Rough Surfaces"		
+	float phi = abs(ToPolar(v).z - ToPolar(l).z);
+	float lambda_Phi = (4.41f * phi) / (4.41f * phi + 1);
+
+	float nominator = pow(xDotH, 2);
+	float denominator = 1 + max(lambda_GGX_v, lambda_GGX_l) + lambda_Phi * min(lambda_GGX_v, lambda_GGX_l);
+
+	return nominator / denominator;
+}
+
+// See "Real Time Rendering 4th ed. - Equation 9.31"
+float SmithHeightCorrelatedG2_GGX(const float xDotH, const float nDotV, const float nDotL, const float roughness)
+{
+	// From Disney: Squared roughness		
+	float alpha = roughness * roughness;	
+
+	// See "Real Time Rendering 4th ed. - Equation 9.37"
+	float a_v = nDotV / (alpha * sqrt(1 - pow(nDotV, 2)));	
+	float a_l = nDotL / (alpha * sqrt(1 - pow(nDotL, 2)));
+
+	// The lambda value differs for each NDF. The procedure to derive lambda for a given NDF is described in publications like 
+	// "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs" by Eric Heitz.	
+	// The value here is from "Real Time Rendering 4th ed. p. 341". 
+	// The same value is used in the MATLAB code from Eric Heitz (Appendix C) in the beforementioned paper.		
+	float lambda_GGX_v = (-1.0f + sqrt(1 + 1 / pow(a_v, 2))) / 2;
+	float lambda_GGX_l = (-1.0f + sqrt(1 + 1 / pow(a_l, 2))) / 2;
+
+	float nominator = pow(xDotH, 2);
+	float denominator = 1 + lambda_GGX_v + lambda_GGX_l;
+
+	return nominator / denominator;
+}
+
+// From: "An Inexpensive BRDF Model for Physically-based Rendering" by Christophe Schlick - Section 4.3
+float Schlick_GGX(const float xDotN, const float roughness)
+{   
+	// k should correspond to the RMS (root mean square) of the slopes of the microfacets.
+	// k value from: https://www.jordanstevenstechart.com/physically-based-rendering
+	// Joey de Vries (https://learnopengl.com/PBR/Theory) uses the term: pow(roughness + 1, 2) / 8 for direct lighting.
+	float k = pow(roughness, 2);
+
+    float nom   = xDotN;
+    float denom = xDotN * (1.0 - k) + k;
+
+    return nom / denom;
+}
+
+float SeparableSchlick_GGX(const float nDotL, const float nDotV, const float roughness)
+{
+	// In their paper from 2012, Disney proposed a remapping for the roughness parameter. 
+	// The parameter moves in the range [0.5, 1] instead of [0, 1] and is squared afterwards. 
+	// After we tried this proposal, it was decided not to adopt it because the changes are marginal. Please refer to the paper for more details.
+    float maskingFactor = Schlick_GGX(nDotV, roughness);
+    float shadowingFactor = Schlick_GGX(nDotL, roughness);
+
+    return maskingFactor * shadowingFactor;
+}
+
+// ---------------------------------------------
+//        --- Anisotropic functions ---
+// ---------------------------------------------
+
+float SmithG1_GGX_Anisotropic(const vec3 x, const vec3 n, const vec3 t, const vec3 b, const float a_x, const float a_y)
+{	
+	float xDotT = dot(x, t);
+
+	float xDotB = dot(x, b);
+
+	float nDotX = dot(n, x);
+	float clampedNDotX = max(nDotX, 0.0f);
+
+	// See "Real Time Rendering 4th ed. - Equation 9.51"
+	float a = clampedNDotX / sqrt(pow(a_x, 2) * pow(xDotT, 2) + pow(a_y, 2) * pow(xDotB, 2));		
+
+	// The lambda value differs for each NDF. The procedure to derive lambda for a given NDF is described in publications like 
+	// "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs" by Eric Heitz.	
+	// The value here is from "Real Time Rendering 4th ed. p. 341". 
+	// The same value is used in the MATLAB code from Eric Heitz (Appendix C) in the beforementioned paper.		
+	float lambda_GGX = (-1.0f + sqrt(1 + 1 / a)) / 2;
+
+	// See "Real Time Rendering 4th ed. - Equation 9.24"
+	return 1.0f / (1.0f + lambda_GGX);
+}
+
+float SeparableSmith_GGX_Anisotropic(const vec3 v, const vec3 l, const vec3 n, const vec3 t, const vec3 b, const float anisotropic, const float roughness)
+{	
+	float a_x = 0.0f;
+	float a_y = 0.0f;
+	GetAnisotropicParameters(a_x, a_y, anisotropic, roughness);
+
+	float maskingFactor = SmithG1_GGX_Anisotropic(v, n, t, b, a_x, a_y);
+    float shadowingFactor = SmithG1_GGX_Anisotropic(l, n, t, b, a_x, a_y);
+
+    return maskingFactor * shadowingFactor;
+}

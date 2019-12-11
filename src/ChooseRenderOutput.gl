@@ -1,0 +1,22 @@
+
+vec4 ChooseRenderOutput(const vec3 albedo, const float ao, const vec2 brdfLookup, const vec3 color, const vec3 emissive, const float metallic, const float roughness)
+{
+	// For case numbers, see PBRViewerEnumerations::RenderOutput
+	switch(renderOutput)
+	{
+		case 0:
+			return vec4(albedo, 1);			
+		case 1:
+			return vec4(vec3(ao), 1);			
+		case 2:
+			return vec4(brdfLookup, 0, 1);				
+		case 3:
+			return vec4(color, 1);
+		case 4:
+			return vec4(emissive, 1);			
+		case 5:
+			return vec4(vec3(metallic), 1);	
+		case 6:
+			return vec4(vec3(roughness), 1);	
+	}
+}

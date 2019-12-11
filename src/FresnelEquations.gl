@@ -1,0 +1,15 @@
+
+// From "Extending the Disney BRDF to a BSDF with Integrated Subsurface Scattering" - Equation 8
+vec3 UnpolarizedDielectricFresnelEquation(const float refractedAngle, const float incidentAngle, const float relativeIOR)
+{
+	float refractedAngle2 = pow(refractedAngle, 2);
+	if(refractedAngle2 <= 0.0f)
+	{
+		return vec3(1.0f);
+	}
+
+	float firstPart = pow((incidentAngle - relativeIOR * refractedAngle) / (refractedAngle + relativeIOR * incidentAngle), 2);
+	float secondPart = pow((incidentAngle - relativeIOR * refractedAngle) / (refractedAngle + relativeIOR * incidentAngle), 2);
+
+	return vec3(0.5f * (firstPart + secondPart));
+}

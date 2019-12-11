@@ -1,0 +1,132 @@
+
+// ---------------------------------------------
+//          --- Anisotropic NDFs ---
+// ---------------------------------------------
+
+void GetAnisotropicParameters(out float a_x, out float a_y, const float anisotropic, const float roughness)
+{
+	// From Disney: Squared roughness		
+	float roughness2 = roughness * roughness;
+    float roughness4 = roughness2 * roughness2;		
+
+	// See "Real Time Rendering 4th ed. - Equation 9.54"
+	float k_aspect = sqrt(1.0f - 0.9f * anisotropic);
+	a_x = roughness4 / k_aspect;
+	a_y = roughness4 * k_aspect;
+}
+
+// See "Real Time Rendering 4th ed. - Equation 9.53"
+float TrowbridgeReitzGGX_Anisotropic(	const vec3 n, 
+										const vec3 h, 
+										const vec3 t,
+										const vec3 b,
+										const float anisotropic, 
+										const float roughness)
+{	
+	float nDotH = dot(n, h);
+	if(nDotH <= 0.0f)
+	{
+		return 0.0f;
+	}
+
+	float a_x = 0.0f;
+	float a_y = 0.0f;
+	GetAnisotropicParameters(a_x, a_y, anisotropic, roughness);	
+
+	// Important: Do NOT clamp the dot product between the normal vector and the tangent- or bitangent vector.
+	float hDotT = dot(h, t);
+	float hDotB = dot(h, b);	
+
+    float nom = 1.0f;
+    float firstPartDenom = Pi * a_x * a_y;
+    float secondPartDenom = pow(pow(hDotT, 2) / pow(a_x, 2) + pow(hDotB, 2) / pow(a_y, 2) + pow(nDotH, 2), 2);
+	
+    return nom / (firstPartDenom * secondPartDenom);
+}
+
+// ---------------------------------------------
+//          --- Isotropic NDFs ---
+// ---------------------------------------------
+
+// Calculates the distribution of micro normal vectors
+float TrowbridgeReitzGGX(const vec3 n, const vec3 h, const float roughness)
+{
+	float nDotH = dot(n, h);
+	if(nDotH <= 0.0f)
+	{
+		return 0.0f;
+	}
+
+    float nDotH2 = nDotH * nDotH;
+
+	// From Disney: Squared roughness (most applications that use the GGX distribution adopted this approach).
+    float a = roughness * roughness;
+    float a2 = a * a;	
+
+    float nom = a2;
+    float denom = (1.0f + nDotH2 * (a2 - 1.0f));
+    denom = Pi * denom * denom;
+
+    return nom / denom;
+}
+
+float BeckmannNDF(const vec3 n, const vec3 h, const float roughness)
+{	
+	// In the literature, Disney's squared roughness is mostly mentioned with the GGX distribution. 
+	// We find that this also provides a better visual result in the Beckmann distribution, 
+	// since the size of the specular highlight increases more linearly with the roughness parameter.
+    float a = roughness * roughness;
+    float a2 = a * a;
+	
+	float clampedNDotH = max(dot(n, h), 0.0f);	
+	float nDotHSquared = clampedNDotH * clampedNDotH;	
+
+	float firstNominator = clampedNDotH;
+	float firstDenominator = Pi * a2 * pow(clampedNDotH, 4);
+	float firstPartialResult;
+	if(firstDenominator != 0)
+	{
+		firstPartialResult = firstNominator / firstDenominator;
+	}
+	else
+	{
+		firstPartialResult = 0;
+	}	
+
+	float secondNominator = (nDotHSquared - 1);	
+	float secondDenominator = a2 * nDotHSquared;
+	float secondPartialResult;
+	if(secondDenominator != 0)
+	{
+		secondPartialResult = exp(secondNominator / secondDenominator);
+	}
+	else
+	{
+		secondPartialResult = 0;
+	}
+
+	return firstPartialResult * secondPartialResult;
+}
+
+float BlinnPhongNDF(const vec3 n, const vec3 h, const float roughness)
+{
+	// The Blinn/Phong NDF defines, that higher roughness values equal smoother surfaces (in contrast to the other distributions).
+	// For a maximum smooth surfaces, the roughness value has to be infinity.
+	// It is advantageous to specify a maximum value (m). This is potentiated with a variable s whose values exist in the interval [0,1]. 
+	// This value s can be made available to the user. 
+	
+	// We reverse the mapping of the Roughness values so that the value 0 corresponds to a smooth surface and the value 1 to a rough surface. 
+	// This is more consistent for the user and allows a direct comparison of different NDFs without having to change the roughness value.
+	float s = 1 - roughness;
+	
+	// The m value is the same as in the game "Call of Duty: Black Ops".
+	const int m = 8192;
+	float mTimesS = pow(m, s);
+	float clampedNDotH = max(dot(n, h), 0.0f);	
+	
+	float nominator = mTimesS + 2;
+	float denominator = 2 * Pi;
+
+	// Zero to the power of zero is undefined so we use zero as the minimum value to prevent black spots on the model.
+	return clampedNDotH * (nominator / denominator) * max(pow(clampedNDotH, mTimesS), 0.0);
+}

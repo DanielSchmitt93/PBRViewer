@@ -1,0 +1,14 @@
+
+// Schlick's approximation for the fresnel term.
+// We use a spherical gaussian approximation here as proposed by Unreal Engine (See research paper "Real Shading in Unreal Engine 4").
+// It is slightly more efficient to calculate and the difference is imperceptible.
+vec3 fresnelSchlick(const float cosTheta, const vec3 F0)
+{
+    return F0 + (1.0f - F0) * pow(2, (-5.55473f * cosTheta - 6.98316f) * cosTheta);
+}
+
+// From Sébastien Lagarde: https://seblagarde.wordpress.com/2011/08/17/hello-world/
+vec3 fresnelSchlickRoughness(const float cosTheta, const vec3 F0, const float roughness)
+{
+    return F0 + (max(vec3(1.0f - roughness), F0) - F0) * pow(1.0f - cosTheta, 5.0f);
+} 

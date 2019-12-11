@@ -1,0 +1,23 @@
+
+vec3 ToPolar(const vec3 vectorToConvert)
+{
+	float radius = sqrt(vectorToConvert.x * vectorToConvert.x + vectorToConvert.y * vectorToConvert.y + vectorToConvert.z * vectorToConvert.z);
+	float theta = acos(vectorToConvert.z / radius);	
+
+	// The atan implementation of GLSl already determines in which quadrant the point lies in. 
+	// See https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/atan.xhtml
+	float phi = atan(vectorToConvert.y, vectorToConvert.x);	
+
+	// theta: Zenith angle
+	// phi:   Azimuth angle
+	return vec3(radius, theta, phi);
+}
+
+vec3 ToCartesian(const vec3 vectorToConvert)
+{
+	float x = vectorToConvert.x * sin(vectorToConvert.y) * cos(vectorToConvert.z);
+	float y = vectorToConvert.x * sin(vectorToConvert.y) * sin(vectorToConvert.z);
+	float z = vectorToConvert.x * cos(vectorToConvert.y);
+
+	return vec3(x, y, z);
+}
