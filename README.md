@@ -20,7 +20,7 @@ OpenGL Version 4.3 or higher is required.
 ## Setup
 
 1. Clone the repository including submodules:  
-`git clone --recurse-submodules https://git.informatik.fh-nuernberg.de/schmittda62253/pbrviewer`
+`git clone --recurse-submodules https://github.com/DanielSchmitt93/PBRViewer`
 2. Execute `Setup.ps1` in order to extract the provided 3D models  
 *If you get the error: "Running scripts is disabled on this system" please perform `set-executionpolicy remotesigned` in a powershell window with administrative rights.*
 3. Load the solution file (.sln) with Visual Studio
